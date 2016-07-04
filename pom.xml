@@ -11,6 +11,19 @@
 
     <inceptionYear>2016</inceptionYear>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Thiago Gutenberg Carvalho da Costa</name>
+        <url>http://www.thiaguten.com.br</url>
+    </organization>
+
     <developers>
         <developer>
             <id>thiaguten</id>
@@ -24,6 +37,18 @@
             <timezone>America/Sao_Paulo</timezone>
         </developer>
     </developers>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/thiaguten/simple-compress/issues</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git@github.com:thiaguten/simple-compress.git</connection>
+        <developerConnection>scm:git:git@github.com:thiaguten/simple-compress.git</developerConnection>
+        <url>git@github.com:thiaguten/simple-compress.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <dependencies>
         <!-- tess4j 3.0 (dependence commented to change the source code manually)
@@ -117,7 +142,6 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.5.1</version>
-                <inherited>true</inherited>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -141,6 +165,54 @@
                         </requireJavaVersion>
                     </rules>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <configuration>
+                    <show>public</show>
+                    <maxmemory>1024m</maxmemory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.9</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <addSvnKeyWords>false</addSvnKeyWords>
+                    <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <licenseName>apache_v2</licenseName>
+                            <encoding>UTF-8</encoding>
+                            <roots>
+                                <root>src/main/java/br/com/thiaguten</root>
+                                <root>src/test/br/com/thiaguten</root>
+                            </roots>
+                            <excludes>
+                                <exclude>**/*.xml</exclude>
+                                <exclude>**/*.xsd</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-shade-plugin</artifactId>

@@ -1,3 +1,22 @@
+/*-
+ * #%L
+ * tesseract-integration
+ * %%
+ * Copyright (C) 2016 Thiago Gutenberg Carvalho da Costa
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package br.com.thiaguten.ocr;
 
 import net.sourceforge.tess4j.ITesseract;
@@ -24,7 +43,6 @@ public class OCR {
 
     private final ExecutorService executorService;
 
-    private final List<Path> paths;
     private final int threadWorkerBreath;
 
     /**
@@ -35,12 +53,11 @@ public class OCR {
     public static void main(String[] args) {
         OCRArgs ocrArgs = new OCRArgs(args);
         OCR ocr = new OCR(ocrArgs);
-        ocr.run();
+        ocr.run(ocrArgs.getPaths());
         ocr.shutdown();
     }
 
     public OCR(OCRArgs ocrArgs) {
-        this.paths = ocrArgs.getPaths();
         this.threadWorkerBreath = ocrArgs.getThreadBreath();
         this.executorService = Executors.newFixedThreadPool(ocrArgs.getThreads());
 
@@ -52,11 +69,11 @@ public class OCR {
         });
     }
 
-    public void run() {
-        run(TimeUnit.SECONDS);
+    public void run(final List<Path> paths) {
+        run(paths, TimeUnit.SECONDS);
     }
 
-    public void run(final TimeUnit timeUnit) {
+    public void run(final List<Path> paths, final TimeUnit timeUnit) {
         for (Path image : paths) {
             executorService.execute(new OCRTask(image));
 
@@ -91,7 +108,7 @@ public class OCR {
         public OCRTask(Path imageFile) {
 //            System.setProperty("jna.debug_load", "true"); // print its library search steps to the console
 //            System.setProperty("jna.debug_load.jna", "true"); // trace the search for JNA's own native support
-            System.setProperty("jna.library.path", "/usr/local/lib");
+            System.setProperty("jna.library.path", "/usr/local/lib"); //custom Tesseract lib filesystem locale
 
             this.imageFile = imageFile;
         }
@@ -101,7 +118,7 @@ public class OCR {
             ITesseract instance = new Tesseract(); // JNA Interface Mapping
 //            ITesseract instance = new Tesseract1(); // JNA Direct Mapping
 //            instance.setTessVariable("LC_NUMERIC", "C");
-            instance.setDatapath("/usr/local/share"); // parent directory of tessdata
+            instance.setDatapath("/usr/local/share"); // custom Tesseract langdata - parent directory of tessdata
             instance.setLanguage("por");
 
             try {
