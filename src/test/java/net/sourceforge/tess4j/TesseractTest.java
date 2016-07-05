@@ -58,7 +58,8 @@ public class TesseractTest {
 
     @Before
     public void setUp() {
-        System.setProperty("jna.library.path", "/usr/local/lib");
+//        System.setProperty("jna.library.path", "/usr/local/lib"); // linux custom Tesseract lib filesystem locale
+        System.setProperty("jna.library.path", "/opt/local/lib"); // osx custom Tesseract lib filesystem locale
         instance = new Tesseract();
         instance.setLanguage("eng");
         instance.setDatapath(new File(datapath).getPath());
@@ -93,8 +94,8 @@ public class TesseractTest {
         logger.info("doOCR on a PNG image with UNLV zone file .uzn");
         //UNLV zone format: left top width height label
         File imageFile = new File(testResourcesDataPath, "eurotext_unlv.png");
-//        String expResult = "& duck/goose, as 12.5% of E-mail\n\n"
-        String expResult = "& duck/goose, as lZ.5% of E-mail\n\n"
+        String expResult = "& duck/goose, as 12.5% of E-mail\n\n"
+//        String expResult = "& duck/goose, as lZ.5% of E-mail\n\n"
                 + "from aspammer@website.com is spam.\n\n"
                 + "The (quick) [brown] {fox} jumps!\n"
                 + "Over the $43,456.78 <lazy> #90 dog";

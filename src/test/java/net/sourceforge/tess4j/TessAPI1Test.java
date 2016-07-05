@@ -44,7 +44,7 @@ import static net.sourceforge.lept4j.ILeptonica.L_CLONE;
 import static net.sourceforge.tess4j.ITessAPI.*;
 import static org.junit.Assert.*;
 
-@Ignore
+//@Ignore
 public class TessAPI1Test {
 
     private static final Logger logger = LoggerFactory.getLogger(new LoggHelper().toString());
@@ -66,7 +66,8 @@ public class TessAPI1Test {
 
     @Before
     public void setUp() {
-        System.setProperty("jna.library.path", "/usr/local/lib");
+//        System.setProperty("jna.library.path", "/usr/local/lib"); // linux custom Tesseract lib filesystem locale
+        System.setProperty("jna.library.path", "/opt/local/lib"); // osx custom Tesseract lib filesystem locale
         handle = TessAPI1.TessBaseAPICreate();
     }
 

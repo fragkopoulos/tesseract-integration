@@ -108,7 +108,8 @@ public class OCR {
         public OCRTask(Path imageFile) {
 //            System.setProperty("jna.debug_load", "true"); // print its library search steps to the console
 //            System.setProperty("jna.debug_load.jna", "true"); // trace the search for JNA's own native support
-            System.setProperty("jna.library.path", "/usr/local/lib"); //custom Tesseract lib filesystem locale
+//            System.setProperty("jna.library.path", "/usr/local/lib"); //linux custom Tesseract lib filesystem locale
+            System.setProperty("jna.library.path", "/opt/local/lib"); //osx custom Tesseract lib filesystem locale
 
             this.imageFile = imageFile;
         }
@@ -118,7 +119,8 @@ public class OCR {
             ITesseract instance = new Tesseract(); // JNA Interface Mapping
 //            ITesseract instance = new Tesseract1(); // JNA Direct Mapping
 //            instance.setTessVariable("LC_NUMERIC", "C");
-            instance.setDatapath("/usr/local/share"); // custom Tesseract langdata - parent directory of tessdata
+//            instance.setDatapath("/usr/local/share"); // linux custom Tesseract langdata - parent directory of tessdata
+            instance.setDatapath("/opt/local/share"); // osx custom Tesseract langdata - parent directory of tessdata
             instance.setLanguage("por");
 
             try {

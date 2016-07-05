@@ -23,7 +23,20 @@
         5 - JDK 1.7 or above
 
     Make sure the libraries are installed correctly by typing the following command line:
-        <pre>
+
+        MAC OSX: (MacPorts):
+
+        Thiagos-MacBook-Pro:~ thiago$ tesseract --version
+        tesseract 3.04.00
+         leptonica-1.73
+          libgif 4.2.3 : libjpeg 9a : libpng 1.6.23 : libtiff 4.0.6 : zlib 1.2.8 : libwebp 0.5.0 : libopenjp2 2.1.0
+
+        Thiagos-MacBook-Pro:~ thiago$ gs -v
+        GPL Ghostscript 9.19 (2016-03-23)
+        Copyright (C) 2016 Artifex Software, Inc.  All rights reserved.
+
+        LINUX (Manual Compiling):
+
         thiago@thiago-linux:~$ tesseract --version
         tesseract 3.04.01
          leptonica-1.73
@@ -31,7 +44,7 @@
 
         thiago@thiago-linux:~$ ghostscript --version
         9.10
-        </pre>
+
 ## What is it?
 
     The library provides optical character recognition (OCR) support for:
