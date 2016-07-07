@@ -1,5 +1,7 @@
 # Tesseract Java Integration Example
 
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.html)
+
 ## System Requirements
 
     First of all, do make optical character recognition (OCR) you will need some native libraries:
