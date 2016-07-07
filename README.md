@@ -1,6 +1,6 @@
 # Tesseract Java Integration Example
 
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![License](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 ## System Requirements
 
